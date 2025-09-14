@@ -1,6 +1,10 @@
-<form class="form mx-auto">
+<form
+  class="form mx-auto"
+  #loginForm="ngForm"
+  (ngSubmit)="handleSubmit(loginForm)"
+>
   <h2 class="heading-4 mb-3">Login</h2>
-  <div class="mb-4">
+  <div class="form__group mb-4">
     <label class="form__label" for="emailInput"><b>EMAIL</b></label>
     <input
       class="form__control"
@@ -8,17 +12,34 @@
       name="email"
       id="emailInput"
       placeholder="Enter your email address"
+      autocomplete="off"
+      #emailInput="ngModel"
+      ngModel
+      required
+      email
     />
+    @if(emailInput.dirty && emailInput.errors?.['email']) {
+    <p class="form__feedback form__feedback--invalid">Email invalido</p>
+    }
   </div>
-  <div class="mb-4">
+  <div class="form__group mb-4">
     <label class="form__label" for="passwordInput"><b>PASSWORD</b></label>
     <input
-      class="form__control"
+      class="form__control invalid"
       type="password"
       name="password"
       id="passwordInput"
       placeholder="Enter your password"
+      #passwordInput="ngModel"
+      ngModel
+      required
+      minlength="6"
     />
+    @if(passwordInput.dirty && passwordInput.errors?.['minlength']) {
+    <p class="form__feedback form__feedback--invalid">
+      La contraseña es demasiado corta
+    </p>
+    }
   </div>
-  <button class="button button--primary w-100" type="submit">SUBMIT</button>
+  <button class="button button--primary w-100" type="submit" [disabled]="loginForm.invalid">SUBMIT</button>
 </form>
