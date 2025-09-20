@@ -1,0 +1,211 @@
+<form [formGroup]="form" class="form mx-auto" (ngSubmit)="handleSubmit()">
+  <h2 class="heading-5">Welcome on board!</h2>
+  <p class="mb-4">
+    We just need a little bit of data from you to get you started
+  </p>
+  <div class="form__group w-50 mb-3 pr-3">
+    <label class="form__label" for="emailInput"><b>EMAIL</b></label>
+    <input
+      class="form__control"
+      type="email"
+      name="email"
+      id="emailInput"
+      placeholder="Enter your email address"
+      autocomplete="off"
+      formControlName="email"
+    />
+    @if(isInvalidEmail) {
+    <p class="form__feedback form__feedback--invalid">
+      {{ isInvalidEmail }}
+    </p>
+    }
+  </div>
+  <div class="d-flex gap-lg">
+    <div class="form__group w-50">
+      <label class="form__label" for="passwordInput"><b>PASSWORD</b></label>
+      <input
+        class="form__control"
+        type="password"
+        name="password"
+        id="passwordInput"
+        placeholder="Enter your password"
+        formControlName="password"
+      />
+      @if (passwordInput.dirty && passwordInput.errors?.['minlength']) {
+      <p class="form__feedback form__feedback--invalid">
+        Password must be at least 6 characters long
+      </p>
+      }
+    </div>
+    <div class="form__group w-50">
+      <label class="form__label" for="confirmPasswordInput"
+        ><b>CONFIRM PASSWORD</b></label
+      >
+      <input
+        class="form__control"
+        type="password"
+        name="confirmPassword"
+        id="confirmPasswordInput"
+        placeholder="Enter your password again"
+        formControlName="confirmPassword"
+      />
+      @if (confirmPasswordInput.dirty &&
+      form.errors?.['valuesNotEqual']) {
+      <p class="form__feedback form__feedback--invalid">
+        Passwords do not match
+      </p>
+      }
+    </div>
+  </div>
+  <hr class="d-block mt-5 mb-5" />
+  <div class="d-flex gap-lg">
+    <div class="form__group w-50">
+      <label class="form__label" for="nameInput"><b>FIRST NAME</b></label>
+      <input
+        class="form__control"
+        type="text"
+        name="text"
+        id="nameInput"
+        placeholder="Enter your first name"
+        formControlName="firstName"
+      />
+    </div>
+    <div class="form__group w-50">
+      <label class="form__label" for="lastNameInput"><b>LAST NAME</b></label>
+      <input
+        class="form__control"
+        type="text"
+        name="text"
+        id="lastNameInput"
+        placeholder="Enter your last name"
+        formControlName="lastName"
+      />
+    </div>
+  </div>
+  <fieldset formGroupName="address" class="mt-5 pt-4 pb-4 pl-4 pr-4">
+    <legend>Your address</legend>
+    <div class="d-flex gap-lg mb-4">
+      <div class="form__group w-50">
+        <label class="form__label" for="streetInput"><b>STREET</b></label>
+        <input
+          class="form__control"
+          type="text"
+          name="text"
+          id="streetInput"
+          placeholder="Enter your street"
+          formControlName="street"
+        />
+      </div>
+      <div class="form__group w-50">
+        <label class="form__label" for="streetNumberInput"><b>NUMBER</b></label>
+        <input
+          class="form__control"
+          type="text"
+          name="text"
+          id="streetNumberInput"
+          placeholder="Enter your street number"
+          formControlName="number"
+        />
+      </div>
+    </div>
+    <div class="d-flex gap-lg">
+      <div class="form__group w-50">
+        <label class="form__label" for="postalCodeInput"
+          ><b>POSTAL CODE</b></label
+        >
+        <input
+          class="form__control"
+          type="text"
+          name="text"
+          id="postalCodeInput"
+          placeholder="Enter your postal code"
+          formControlName="postalCode"
+        />
+      </div>
+      <div class="form__group w-50">
+        <label class="form__label" for="cityInput"><b>CITY</b></label>
+        <input
+          class="form__control"
+          type="text"
+          name="text"
+          id="cityInput"
+          placeholder="Enter your city"
+          formControlName="city"
+        />
+      </div>
+    </div>
+  </fieldset>
+  <hr class="d-block mt-5 mb-5" />
+  <div>
+    <label class="form__label" for="roleInput"
+      ><b>WHAT BEST DESCRIBES YOUR ROLE</b></label
+    >
+    <select
+      class="form__control"
+      name="role"
+      id="roleInput"
+      formControlName="role"
+    >
+      @for (role of roles; track role.label) {
+      <option [value]="role.value">{{ role.label }}</option>
+      }
+    </select>
+  </div>
+  <fieldset formArrayName="source" class="mt-5 pt-4 pb-4 pl-4 pr-4">
+    <legend>How did you find us?</legend>
+    <div>
+      <input
+        class="mr-2 form__checkbox"
+        type="checkbox"
+        name="find"
+        id="googleSourceInput"
+        formControlName="0"
+      />
+      <label for="googleSourceInput">GOOGLE</label>
+    </div>
+    <div>
+      <input
+        class="mr-2 form__checkbox"
+        type="checkbox"
+        name="find"
+        id="friendSourceInput"
+        formControlName="1"
+      />
+      <label for="friendSourceInput">REFERRED BY FRIEND</label>
+    </div>
+    <div>
+      <input
+        class="mr-2 form__checkbox"
+        type="checkbox"
+        name="find"
+        id="otherSourceInput"
+        formControlName="2"
+      />
+      <label for="otherSourceInput">OTHER</label>
+    </div>
+  </fieldset>
+  <div class="mt-5 mb-5">
+    <input
+      class="mr-2 form__checkbox"
+      type="checkbox"
+      name="terms"
+      id="termsAndConditionsInput"
+      formControlName="agree"
+    />
+    <label for="termsAndConditionsInput"
+      >I AGREE TO THE TERMS AND CONDITIONS</label
+    >
+  </div>
+  <div class="d-flex gap-lg">
+    <button class="button button--primary d-block w-50" type="submit">
+      Sign Up
+    </button>
+    <button
+      (click)="handleReset()"
+      class="button button--primary-outline d-block w-50"
+      type="button"
+    >
+      Reset
+    </button>
+  </div>
+</form>
