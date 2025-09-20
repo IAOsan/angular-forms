@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { LoginComponent } from './auth/login/login.component';
+import { SignUpComponent } from './auth/signUp/signUp.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [LoginComponent],
+  imports: [SignUpComponent],
   templateUrl: './app.html',
 })
 export class App {

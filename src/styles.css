@@ -79,7 +79,8 @@ textarea {
   background-color: #7c3aed;
   color: white;
 }
-.button--primary:focus {
+.button--primary:focus,
+.button--primary-outline:focus  {
   box-shadow: 0px 0px 0px 4px #7c3aed46;
 }
 .button--primary:active:not(:disabled) {
@@ -87,6 +88,17 @@ textarea {
 }
 .button--primary:hover:not(:active):not(:disabled) {
   background-color: #8346ed;
+}
+.button--primary-outline {
+  background-color: transparent;
+  color: #7c3aed;
+  border: .1rem solid #7c3aed;
+}
+.button--primary-outline:hover:not(:active):not(:disabled) {
+  background-color: #7c3aed1d;
+}
+.button--primary-outline:active:not(:disabled) {
+  background-color: #7237d84b;
 }
 
 .form {
@@ -111,6 +123,16 @@ textarea {
 .form__control:focus.ng-invalid.ng-dirty {
   box-shadow: 0px 0px 0px 4px #ef444481;
 }
+.form__checkbox {
+  outline: none;
+  border: none;
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+}
+.form__checkbox:focus {
+  box-shadow: 0px 0px 0px 4px #7c3aed46;
+}
 @supports selector(:has(*)) {
   .form__group:has(.form__control.ng-invalid.ng-dirty) label {
     color: #cb3b3b;
@@ -130,6 +152,13 @@ textarea {
 }
 .form__feedback--invalid {
   color: #cb3b3b;
+}
+
+.d-flex {
+  display: flex;
+}
+.d-block {
+  display: block;
 }
 
 .text-center {
@@ -306,6 +335,16 @@ textarea {
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
+.gap {
+  gap: 1rem;
+}
+.gap-lg {
+  gap: 1.5rem;
+}
+
 .w-100 {
   width: 100%;
+}
+.w-50 {
+  width: 50%;
 }
